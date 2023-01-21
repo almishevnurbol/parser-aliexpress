@@ -63,7 +63,7 @@ const login = async (event, context, callback) => {
 
     return result
   } catch (error) {
-    return 'error';
+    return error;
   } finally {
     if (browser !== null) {
       await 'finnaly';
