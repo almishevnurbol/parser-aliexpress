@@ -21,24 +21,58 @@ const url = 'https://aliexitem.com/asp?productId=vVDNM%2BHcDzDU36Gi5X25JHWV2RDtY
 // });
 
 
-const puppeteer = require('puppeteer')
-async function login() {
+// const puppeteer = require('puppeteer')
+// async function login() {
+//   try {
+//       const URL = url
+//       const browser = await puppeteer.launch({headless: false})
+//       const page = await browser.newPage()
+
+//       await page.goto(URL, {waitUntil: 'domcontentloaded'})
+//       const result = await page.content()
+
+//       await browser.close()
+
+//       return result
+
+//   } catch (error) {
+//       console.error(error)
+//   }
+// }
+
+const chromium = require('chrome-aws-lambda');
+
+const login = async (event, context, callback) => {
+  let result = null;
+  let browser = null;
+
   try {
-      const URL = url
-      const browser = await puppeteer.launch({headless: false})
-      const page = await browser.newPage()
+    browser = await chromium.puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+      ignoreHTTPSErrors: true,
+      headless: false
+    });
 
-      await page.goto(URL, {waitUntil: 'domcontentloaded'})
-      const result = await page.content()
+    let page = await browser.newPage();
 
-      await browser.close()
+    await page.goto(url);
+    result = await page.content()
 
-      return result
-
+    return result
   } catch (error) {
-      console.error(error)
+    return 'error';
+  } finally {
+    if (browser !== null) {
+      await 'finnaly';
+    }
   }
-}
+
+  return result;
+};
+
 
 
 const express = require('express')
