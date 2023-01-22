@@ -59,6 +59,10 @@ const login = async (url) => {
     let page = await browser.newPage();
 
     await page.goto(url);
+    await page.waitForSelector('.gallery_Gallery__picture__re6q0q', {
+      visible: true,
+    })
+
     result = await page.content()
 
     return result
