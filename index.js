@@ -42,7 +42,7 @@ const url = 'https://aliexitem.com/asp?productId=vVDNM%2BHcDzDU36Gi5X25JHWV2RDtY
 
 const chromium = require('chrome-aws-lambda');
 
-const login = async (event, context, callback) => {
+const login = async (url) => {
   let result = null;
   let browser = null;
 
@@ -87,7 +87,7 @@ const port = 5000
 app.get('/', async (req, res) => {
   try {
       const response = {}
-      response.html = await login()
+      response.html = await login(req.query.url)
 
       console.log(response)
       res.json(response)
