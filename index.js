@@ -103,13 +103,9 @@ app.get('/', async (req, res) => {
   }
 })
 
-app.get('*', (req, res) => {
-  try {
-    const response = { text: 'Success!' }
-    res.json(response)
-  } catch (error) {
-    res.json(error)
-  }
+app.get('/register', (req, res) => {
+  const response = { text: 'Success!' }
+  res.json(response)
 })
 
 app.listen(port, () => {
