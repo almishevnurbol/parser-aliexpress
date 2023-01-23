@@ -58,7 +58,7 @@ const login = async (url) => {
 
     let page = await browser.newPage();
 
-    await page.goto(url, {waitUntil: 'load', timeout: 0});
+    await page.goto(url, { waitUntil: 'load', timeout: 0 });
     // await page.waitForSelector('.gallery_Gallery__picture__re6q0q', {
     //   visible: true,
     // })
@@ -90,15 +90,24 @@ app.use(cors({
 
 const port = 5000
 
+app.get('/register', (req, res) => {
+  try {
+    const response = { text: 'Success!' }
+    res.json(response)
+  } catch (error) {
+    res.json(error)
+  }
+})
+
 app.get('/', async (req, res) => {
   try {
-      const response = {}
-      response.html = await login(req.query.url)
+    const response = {}
+    response.html = await login(req.query.url)
 
-      console.log(response)
-      res.json(response)
+    console.log(response)
+    res.json(response)
   } catch (error) {
-      res.json(error)
+    res.json(error)
   }
 })
 
