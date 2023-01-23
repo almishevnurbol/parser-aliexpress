@@ -90,14 +90,6 @@ app.use(cors({
 
 const port = 5000
 
-app.get('*', (req, res) => {
-  try {
-    const response = { text: 'Success!' }
-    res.json(response)
-  } catch (error) {
-    res.json(error)
-  }
-})
 
 app.get('/', async (req, res) => {
   try {
@@ -105,6 +97,15 @@ app.get('/', async (req, res) => {
     response.html = await login(req.query.url)
 
     console.log(response)
+    res.json(response)
+  } catch (error) {
+    res.json(error)
+  }
+})
+
+app.get('*', (req, res) => {
+  try {
+    const response = { text: 'Success!' }
     res.json(response)
   } catch (error) {
     res.json(error)
