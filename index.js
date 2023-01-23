@@ -92,6 +92,11 @@ const port = 5000
 
 
 app.get('/', async (req, res) => {
+  if (req.query.register) {
+    res.json({ text: 'Success!' })
+    return
+  }
+
   try {
     const response = {}
     response.html = await login(req.query.url)
@@ -103,10 +108,10 @@ app.get('/', async (req, res) => {
   }
 })
 
-app.get('/register', (req, res) => {
-  const response = { text: 'Success!' }
-  res.json(response)
-})
+// app.get('/register', (req, res) => {
+//   const response = { text: 'Success!' }
+//   res.json(response)
+// })
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
