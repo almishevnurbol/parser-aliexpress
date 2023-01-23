@@ -90,7 +90,7 @@ app.use(cors({
 
 const port = 5000
 
-app.get('/register', (req, res) => {
+app.get('*', (req, res) => {
   try {
     const response = { text: 'Success!' }
     res.json(response)
