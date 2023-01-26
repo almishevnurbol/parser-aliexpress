@@ -58,12 +58,13 @@ const login = async (url) => {
 
     let page = await browser.newPage();
 
-    await page.goto(url, { waitUntil: 'load', timeout: 0 });
-    // await page.waitForSelector('.gallery_Gallery__picture__re6q0q', {
+    await page.goto(url, { waitUntil: "domcontentloaded" })
+    // await page.waitForSelector('#__AER_DATA__', {
     //   visible: true,
     // })
 
     result = await page.content()
+    // await browser.close()
 
     return result
   } catch (error) {
